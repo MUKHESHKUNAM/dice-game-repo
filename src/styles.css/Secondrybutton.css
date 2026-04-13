@@ -1,0 +1,8 @@
+.secondrybutton button {
+  background-color: blue;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 6px;
+}

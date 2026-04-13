@@ -1,0 +1,12 @@
+.headingbox {
+  color: rgb(248, 7, 7);
+  text-align: center;
+}
+.headingbox h2 {
+  color: black;
+}
+
+.SecondBox {
+  display: flex;
+  justify-content: space-evenly;
+}
