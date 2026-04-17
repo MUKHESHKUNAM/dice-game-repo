@@ -1,7 +1,10 @@
 .currentScoreBox {
   height: 60px;
   width: 150px;
-  background-color: red;
+  background-color: rgb(248, 4, 4);
+  border-radius: 5px;
+  border: 1px solid black;
+  box-shadow: 5px 3px 3px;
 }
 .ThirdBox {
   display: flex;
@@ -9,11 +12,14 @@
   text-align: center;
 }
 .ThirdBox h3 {
-  color: white;
+  color: rgb(248, 245, 245);
   font-size: 25px;
 }
-.ThirdMiddleBox{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.ThirdBox h2 {
+   color: rgb(248, 244, 244);
+}
+.ThirdMiddleBox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

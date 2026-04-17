@@ -1,12 +1,11 @@
-import { FaSmile } from "react-icons/fa";
 import "../styles.css/Button.css";
-export const TransprentButtons = (props) => {
+export const TransprentButtons = ({ icon, myButton, RollDicefun,styleName, }) => {
   return (
     <>
-      <div className="topbutton">
-        <button>
-          {props.icon}
-          {props.myButton}
+      <div className={styleName?styleName:"topbutton"}>
+        <button onClick={RollDicefun}>
+          {icon}
+          {myButton}
         </button>
       </div>
     </>

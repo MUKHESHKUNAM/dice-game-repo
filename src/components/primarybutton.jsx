@@ -3,10 +3,9 @@ export const PrimaryButton = (props) => {
   return (
     <>
       <div className="primarybutton">
-        <button>
-           {props.icon}
+        <button >
+          {props.icon}
           {props.myButton1}
-         
         </button>
       </div>
     </>

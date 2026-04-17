@@ -1,5 +1,3 @@
-export const Inputfeild=(props)=>{
-    return(<>
-    <div>{props.myInput}</div>
-    </>)
-}
+export const Inputfeild = (props) => {
+  return <>{props.myInput}</>;
+};

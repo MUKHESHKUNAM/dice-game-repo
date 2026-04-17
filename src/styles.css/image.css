@@ -1,6 +1,6 @@
-.diceimg {
+.diceimg img {
   height: 100px;
   width: 100px;
-  background-image: url("../assets/images/dice-1.png");
-  background-size: cover;
+  border: 1px solid black;
+  box-shadow: 5px 5px 8px black;
 }
