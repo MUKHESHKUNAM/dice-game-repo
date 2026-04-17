@@ -10,21 +10,27 @@ import {
   FaSmile,
 } from "react-icons/fa";
 import { TransprentButtons } from "./components/TransprentButton";
-import { PlayerNameScore } from "./components/PlayernameScore";
-import { CurrentScore } from "./components/CurrentScore";
 import { PrimaryButton } from "./components/primarybutton";
 import { Secondrybutton } from "./components/secondrybutton";
 import { Inputfeild } from "./components/inputfield";
 import { Images } from "./components/images";
 import { useState } from "react";
+import { Players } from "./components/players";
+import { Popup } from "./components/popup";
+import { Edit } from "./components/edit";
+import { PiPenLight } from "react-icons/pi";
+import { Winner } from "./components/winnerpopup";
 export const App = () => {
+  let [winnername, setwinnername] = useState("");
+  let [winner, setwinner] = useState(false);
+  let [openrules, setopenrules] = useState(false);
+  let [openedit, setopenedit] = useState(false);
   let [curscore, setcurscore] = useState(0);
   let [seccurscore, setseccurscore] = useState(0);
   let [player1Score, setPlayer1Score] = useState(0);
   let [player2Score, setPlayer2Score] = useState(0);
   let [activeplayer, setactiveplayer] = useState(1);
   let [inputval, setinputvalfun] = useState(0);
-  let [winner, setwinner] = useState("");
   let [number, setnumber] = useState(1);
 
   const RollDice = () => {
@@ -40,25 +46,29 @@ export const App = () => {
   const Hold = () => {
     if (activeplayer === 1) {
       setactiveplayer(2);
-      setPlayer1Score(player1Score + curscore);
-      setcurscore(0);
-      
+      const playerscore1 = player1Score + curscore;
+      if (playerscore1 >= inputval) {
+        setPlayer1Score(playerscore1);
+        setcurscore(0);
+        win();
+      } else {
+        setPlayer1Score(playerscore1);
+        setcurscore(0);
+      }
     } else {
-      setactiveplayer(1);
-      setPlayer2Score(player2Score + seccurscore);
-      setseccurscore(0);
+      const playerscor2 = player2Score + seccurscore;
+      if (playerscor2 >= inputval) {
+        setactiveplayer(1);
+        setPlayer2Score(playerscore2);
+        win();
+      } else {
+        setPlayer2Score(playerscor2);
+        setseccurscore(0);
+        setactiveplayer(1);
+      }
     }
   };
-  // const won = () => {
-  //   if (player1Score >= inputval) {
-  //     setwinner("YOU WON");
-  //   }
-  // };
-  console.log(inputval);
-  // const doublfun = () => {
-  //   Hold();
-  //   won();
-  // };
+
   const newgame = () => {
     setPlayer1Score(0);
     setPlayer2Score(0);
@@ -70,10 +80,29 @@ export const App = () => {
   const input = (e) => {
     setinputvalfun(e.target.value);
   };
+  const openpopup = () => {
+    setopenrules(!openrules);
+  };
+  const openpopup1 = () => {
+    setopenedit(!openedit);
+  };
+  const win = () => {
+    setwinner(!winner);
+  };
 
   return (
     <>
       <div className="mainbox">
+        <div className="player1box">
+          <Players
+            name="player1"
+            score={player1Score}
+            player={activeplayer === 1}
+            curr="current"
+            currscore={curscore}
+          />
+        </div>
+
         <div className="FirstBOx">
           <TransprentButtons
             myButton="startGame"
@@ -85,59 +114,58 @@ export const App = () => {
             icon={<FaRedo className="icon" />}
           />
         </div>
-        <div className="SecondBox">
-          <PlayerNameScore name="PlayerOne" Score={player1Score} win={winner} />
-          <Images randomnum={number} />
-          <PlayerNameScore name="PlayerTwo" Score={player2Score} />
+        {winner && <Winner name={win} />}
+
+        <div className="player2box">
+          <Players
+            name="player2"
+            score={player2Score}
+            player={activeplayer === 2}
+            curr="current"
+            currscore={seccurscore}
+          />
         </div>
-        <div className="ThirdBox">
-          <CurrentScore text="currentScore" curScore={curscore} />
-          <div className="ThirdMiddleBox">
-            <div>
-              <TransprentButtons
-                styleName="roll"
-                RollDicefun={RollDice}
-                myButton="RollDice"
-                icon={<FaDice className="icon" />}
-              />
-            </div>
-            <div>
-              <TransprentButtons
-                RollDicefun={Hold}
-                myButton="HOLD"
-                icon={<FaHandPaper className="icon" />}
-              />
-            </div>
+
+        <Images randomnum={number} />
+        <div className="secondboxcontainer">
+          <div className="secondbox">
+            <TransprentButtons
+              // styleName="roll"
+              RollDicefun={RollDice}
+              myButton="RollDice"
+              icon={<FaDice className="icon" />}
+            />
           </div>
-          <CurrentScore text="CurrentScore" curScore={seccurscore} />
+          <div className="secondbox">
+            <TransprentButtons
+              RollDicefun={Hold}
+              myButton="HOLD"
+              icon={<FaHandPaper className="icon" />}
+            />
+          </div>
         </div>
-        <div className="FourthBox">
+        <div className="thirdbox">
           <PrimaryButton
-            myButton1="normalmode"
+            myButton="NORMAL MODE"
             icon={<FaSmile className="icon" />}
           />
-          <Secondrybutton
-            myButton2=" hardmode"
+          <PrimaryButton
+            myButton="HARD MODE"
             icon={<FaSkull className="icon" />}
           />
-          <Inputfeild
-            myInput={
-              <input
-                onChange={input}
-                type="number"
-                placeholder="targetScore"
-                className="inputbar"
-              ></input>
-            }
-          />
-          <PrimaryButton
-            myButton1="rules"
+          <Inputfeild value={input} />
+          <Secondrybutton
+            click={openpopup}
+            myButton="RULES"
             icon={<FaListUl className="icon" />}
           />
+          {openrules && <Popup close={openpopup} />}
           <Secondrybutton
-            myButton2="Edit player name"
+            click={openpopup1}
+            myButton="EDIT PLAYER NAME"
             icon={<FaEdit className="icon" />}
           />
+          {openedit && <Edit close={openpopup1} />}
         </div>
       </div>
     </>

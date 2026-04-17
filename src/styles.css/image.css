@@ -4,3 +4,8 @@
   border: 1px solid black;
   box-shadow: 5px 5px 8px black;
 }
+.diceimg {
+  position: absolute;
+  margin-top: 145px;
+  margin-left: 395px;
+}

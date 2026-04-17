@@ -1,3 +1,7 @@
 export const Inputfeild = (props) => {
-  return <>{props.myInput}</>;
+  return (
+    <>
+      <input type="number" placeholder="Targetscore" onChange={props.value} />
+    </>
+  );
 };

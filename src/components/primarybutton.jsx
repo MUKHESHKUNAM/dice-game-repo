@@ -5,7 +5,7 @@ export const PrimaryButton = (props) => {
       <div className="primarybutton">
         <button >
           {props.icon}
-          {props.myButton1}
+          {props.myButton}
         </button>
       </div>
     </>

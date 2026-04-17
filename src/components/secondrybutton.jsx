@@ -3,10 +3,10 @@ export const Secondrybutton = (props) => {
   return (
     <>
       <div className="secondrybutton">
-        <button>
-          {" "}
+        <button onClick={props.click}>
+          
           {props.icon}
-          {props.myButton2}
+          {props.myButton}
         </button>
       </div>
     </>

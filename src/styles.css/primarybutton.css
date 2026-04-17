@@ -1,5 +1,5 @@
 .primarybutton button {
-  background-color: red;
+  background-color: rgba(255, 0, 0, 0.7);
   color: white;
   border: none;
   font-size: 20px;
@@ -8,5 +8,4 @@
 }
 .primarybutton button:hover {
   box-shadow: 5px 3px 3px black;
-  
 }
