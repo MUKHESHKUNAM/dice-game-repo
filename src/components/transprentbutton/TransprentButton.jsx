@@ -1,4 +1,4 @@
-import "../styles.css/Button.css";
+import "../transprentbutton/Button.css";
 export const TransprentButtons = ({
   icon,
   myButton,
@@ -8,7 +8,7 @@ export const TransprentButtons = ({
   return (
     <>
       <div>{icon}</div>
-      <div className={styleName ? styleName : "topbutton"}>
+      <div className="topbutton">
         <button onClick={RollDicefun}>{myButton}</button>
       </div>
     </>

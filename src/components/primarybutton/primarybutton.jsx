@@ -1,9 +1,9 @@
-import "../styles.css/primarybutton.css";
+import "../primarybutton/primarybutton.css";
 export const PrimaryButton = (props) => {
   return (
     <>
       <div className="primarybutton">
-        <button >
+        <button>
           {props.icon}
           {props.myButton}
         </button>

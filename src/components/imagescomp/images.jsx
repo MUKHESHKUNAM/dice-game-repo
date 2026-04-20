@@ -1,4 +1,4 @@
-import "../styles.css/image.css";
+import "../imagescomp/image.css";
 export const Images = (props) => {
   return (
     <>
