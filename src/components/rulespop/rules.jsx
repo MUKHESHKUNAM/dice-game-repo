@@ -8,12 +8,12 @@ export const Popup = (props) => {
             <h1>RULES</h1>
           </div>
           <div>
+            <h4>1. THE GAME HAS 2 PLAYERS,PLAYING IN ROUNDS</h4>
+            <h4>2. IN EACH TURN, A PLAYER ROLLS DICE AS MANY TIMES  AS THE WHISHES.</h4>
             <h4>
-              1. IF ANY PLAYER ROLLES 1 LOOSE THERE TURN. OPPONENT WILL GET
+              3. IF ANY PLAYER ROLLES 1 LOOSE THERE TURN. OPPONENT WILL GET
               CHANCE TO ROLL THE DICE.
             </h4>
-            <h4>2. SECOND</h4>
-            <h4>3. THIRD</h4>
             <h4>4. FOURTH</h4>
             <h4>5. FIFTH</h4>
           </div>

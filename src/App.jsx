@@ -17,12 +17,12 @@ import { Inputfeild } from "./components/inputcomp/inputfield";
 import { Images } from "./components/imagescomp/images";
 import { useState } from "react";
 import { Players } from "./components/playerbox/players";
-
 import { Edit } from "./components/editplayernamepop/edit";
 import { PiPenLight } from "react-icons/pi";
 import { Winner } from "./components/winnerpop/winnerpopup";
 import { Popup } from "./components/rulespop/rules";
 export const App = () => {
+  let [hardmode, sethardmode] = useState(false);
   let [warning, setwarning] = useState("");
   let [startgame, setstartgame] = useState(false);
   let [playername1, setplayer1name] = useState("player1");
@@ -143,9 +143,17 @@ export const App = () => {
   const name2input = (e) => {
     setplayer2name(e.target.value);
   };
+  const uichange = () => {
+    sethardmode(true);
+  };
+  const normalmode = () => {
+    sethardmode(false);
+  };
+
+  let uichangevar = hardmode ? "root hardmode" : "root";
 
   return (
-    <>
+    <div className={uichangevar}>
       <div className="mainbox">
         <div className="player1box">
           <Players
@@ -186,8 +194,11 @@ export const App = () => {
             currscore={seccurscore}
           />
         </div>
+        <div className="imagesbox">
+          <Images randomnum={number} />
+          {hardmode && <Images randomnum={number} />}
+        </div>
 
-        <Images randomnum={number} />
         <div className="secondboxcontainer">
           <div className="secondbox">
             {startgame && (
@@ -211,10 +222,12 @@ export const App = () => {
         </div>
         <div className="thirdbox">
           <PrimaryButton
+            click={normalmode}
             myButton="NORMAL MODE"
             icon={<FaSmile className="icon" />}
           />
           <PrimaryButton
+            click={uichange}
             myButton="HARD MODE"
             icon={<FaSkull className="icon" />}
           />
@@ -241,6 +254,6 @@ export const App = () => {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
