@@ -6,7 +6,7 @@ export const Players = (props) => {
   return (
     <>
       <div className={activeindc}>
-        <div>
+        <div >
           <h1 className="player-name">{props.name}</h1>
         </div>
         <div>

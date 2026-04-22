@@ -5,7 +5,7 @@
 }
 
 .root {
-  background-color: black;
+  background-image: url("src/assets/451028.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
@@ -15,7 +15,15 @@
   align-items: center;
 }
 .hardmode {
-  background-color: #8b0000;
+  background-image: url("src/assets/fire-dice-tabletop-gaming-logo-8d8b2468-5715-4bff-84de-e54775d76b4b.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .imagesbox {
   position: absolute;
@@ -37,10 +45,28 @@
   justify-content: space-evenly;
   align-items: center;
 }
+.hardplayer1box {
+  height: 599px;
+  width: 450px;
+  background-color: rgba(1, 1, 1, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
 .player2box {
   height: 599px;
   width: 450px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(141, 146, 147, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.hardplayer2box {
+  height: 599px;
+  width: 450px;
+  background-color: rgba(37, 36, 36, 0.9);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -51,7 +77,7 @@
   gap: 10px;
   justify-content: center;
   position: absolute;
-  margin-left: 380px;
+  margin-left: 330px;
   margin-top: 50px;
 }
 .secondboxcontainer {

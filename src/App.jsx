@@ -21,7 +21,9 @@ import { Edit } from "./components/editplayernamepop/edit";
 import { PiPenLight } from "react-icons/pi";
 import { Winner } from "./components/winnerpop/winnerpopup";
 import { Popup } from "./components/rulespop/rules";
+import { Hardmoderules } from "./components/rulespop/hardmoderules";
 export const App = () => {
+  let [normalmodebtn, setnormalmodebtn] = useState(false);
   let [hardmode, sethardmode] = useState(false);
   let [warning, setwarning] = useState("");
   let [startgame, setstartgame] = useState(false);
@@ -38,10 +40,15 @@ export const App = () => {
   let [activeplayer, setactiveplayer] = useState(1);
   let [inputval, setinputvalfun] = useState(0);
   let [number, setnumber] = useState(1);
+  let [number1, setnumber1] = useState(1);
+  let [hardmoderules, sethardmoderules] = useState(false);
+  let [lastrollsix, setlastrollsix] = useState(false);
 
   const RollDice = () => {
     const randnum = Math.ceil(Math.random() * 6);
+
     setnumber(randnum);
+
     if (activeplayer === 1) {
       setcurscore(curscore + randnum);
       if (activeplayer === 1 && randnum === 1) {
@@ -58,6 +65,66 @@ export const App = () => {
     }
   };
 
+  const RollDicehard = () => {
+    const randnum = Math.ceil(Math.random() * 6);
+    const randnum1 = Math.ceil(Math.random() * 6);
+
+    setnumber(randnum);
+    setnumber1(randnum1);
+    if (activeplayer === 1) {
+      if (randnum === 6 || randnum1 === 6) {
+        if (lastrollsix === true) {
+          setcurscore((cur) => cur - 20);
+          setlastrollsix(false);
+        } else {
+          if (randnum === 1 || randnum1 === 1) {
+            setactiveplayer(2);
+            setcurscore(0);
+            setPlayer1Score((player1Score) => player1Score + curscore);
+          } else {
+            setcurscore(curscore + randnum + randnum1);
+            setlastrollsix(true);
+          }
+        }
+      } else {
+        if (randnum === 1 || randnum1 === 1) {
+          setactiveplayer(2);
+          setcurscore(0);
+          setPlayer1Score((player1Score) => player1Score + curscore);
+          setlastrollsix(false);
+        } else {
+          setcurscore(curscore + randnum + randnum1);
+          setlastrollsix(false);
+        }
+      }
+    } else {
+      if (randnum === 6 || randnum1 === 6) {
+        if (lastrollsix === true) {
+          setPlayer2Score((player2Score) => player2Score - 20);
+          setlastrollsix(false);
+        } else {
+          if (randnum === 1 || randnum1 === 1) {
+            setactiveplayer(1);
+            setseccurscore(0);
+            setPlayer2Score((player2Score) => player2Score + seccurscore);
+          } else {
+            setseccurscore(seccurscore + randnum + randnum1);
+            setlastrollsix(true);
+          }
+        }
+      } else {
+        if (randnum === 1 || randnum1 === 1) {
+          setactiveplayer(1);
+          setseccurscore(0);
+          setPlayer2Score((player2Score) => player2Score + seccurscore);
+          setlastrollsix(false);
+        } else {
+          setseccurscore(seccurscore + randnum + randnum1);
+          setlastrollsix(false);
+        }
+      }
+    }
+  };
   const Hold = () => {
     if (activeplayer === 1) {
       setactiveplayer(2);
@@ -87,26 +154,32 @@ export const App = () => {
   const startfun = () => {
     setstartgame(true);
     setopenrules(!openrules);
+    setnormalmode(true);
     // setopenedit(!openedit);
   };
 
-  // const newgame = () => {
-  //   setPlayer1Score(0);
-  //   setPlayer2Score(0);
-  //   setcurscore(0);
-  //   setseccurscore(0);
-  //   setactiveplayer(1);
-  //   setnumber(1);
-  //   setplayer1name("player1");
-  //   setplayer2name("player2");
-  //   setopenedit(!openedit);
-  // };
+  const newgame = () => {
+    setPlayer1Score(0);
+    setPlayer2Score(0);
+    setcurscore(0);
+    setseccurscore(0);
+    setactiveplayer(1);
+    setnumber(1);
+    setnumber1(1);
+    setplayer1name("player1");
+    setplayer2name("player2");
+  };
   const input = (e) => {
     setinputvalfun(e.target.value);
   };
   const openpopup = () => {
-    setopenrules(!openrules);
+    if (hardmode === true) {
+      sethardmoderules(!hardmoderules);
+    } else {
+      setopenrules(!openrules);
+    }
   };
+
   const openpopup1 = () => {
     setopenedit(!openedit);
     setwarning("");
@@ -145,17 +218,21 @@ export const App = () => {
   };
   const uichange = () => {
     sethardmode(true);
+    setstartgame(false);
   };
   const normalmode = () => {
+    setnormalmodebtn(true);
     sethardmode(false);
   };
 
   let uichangevar = hardmode ? "root hardmode" : "root";
+  let playerbox1 = hardmode ? "player1box hardplayer1box" : "player1box";
+  let playerbox2 = hardmode ? "player2box hardplayer2box" : "player2box";
 
   return (
     <div className={uichangevar}>
       <div className="mainbox">
-        <div className="player1box">
+        <div className={playerbox1}>
           <Players
             name={playername1}
             score={player1Score}
@@ -166,11 +243,12 @@ export const App = () => {
         </div>
 
         <div className="FirstBOx">
-          {/* <TransprentButtons
+          <TransprentButtons
             RollDicefun={newgame}
             myButton="newgame"
             icon={<FaRedo className="icon" />}
-          /> */}
+          />
+
           <TransprentButtons
             RollDicefun={startfun}
             myButton="startGame"
@@ -185,7 +263,7 @@ export const App = () => {
           />
         )}
 
-        <div className="player2box">
+        <div className={playerbox2}>
           <Players
             name={playername2}
             score={player2Score}
@@ -196,7 +274,7 @@ export const App = () => {
         </div>
         <div className="imagesbox">
           <Images randomnum={number} />
-          {hardmode && <Images randomnum={number} />}
+          {hardmode && <Images randomnum={number1} />}
         </div>
 
         <div className="secondboxcontainer">
@@ -209,9 +287,24 @@ export const App = () => {
                 icon={<FaDice className="icon" />}
               />
             )}
+            {hardmode && (
+              <TransprentButtons
+                // styleName="roll"
+                RollDicefun={RollDicehard}
+                myButton="RollDice"
+                icon={<FaDice className="icon" />}
+              />
+            )}
           </div>
           <div className="secondbox">
             {startgame && (
+              <TransprentButtons
+                RollDicefun={Hold}
+                myButton="HOLD"
+                icon={<FaHandPaper className="icon" />}
+              />
+            )}
+            {hardmode && (
               <TransprentButtons
                 RollDicefun={Hold}
                 myButton="HOLD"
@@ -243,6 +336,7 @@ export const App = () => {
             myButton="EDIT PLAYER NAME"
             icon={<FaEdit className="icon" />}
           />
+          {hardmoderules && <Hardmoderules close={openpopup} />}
           {openedit && (
             <Edit
               close={openpopup1}
